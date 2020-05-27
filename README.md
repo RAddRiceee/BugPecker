@@ -6,7 +6,7 @@ BugPecker: Locating Faulty Methods with Deep Learning on Revision Graphs
 We have implemented the BugPecker tool as a Github plugin in Java. After submitting a bug report in the Github issue system, programmers could get ranked suspicious buggy methods later from BugPecker. The github plugin is available [here](https://github.com/apps/bugpecker), which presents more detailed information and user guide about the Github plugin.
 
 ## Introduction
-![arc.png](https://github.com/RAddRiceee/BugPecker/blob/master/arch.pdf)
+![arc.png](https://github.com/RAddRiceee/BugPecker/blob/master/arc.png)
 
 The task of locating the potential buggy files in a software project is called bug localization. To help programmers in bug localization process, many automated bug localization approaches have been proposed. Although these approaches achieved promising results at file level, method level bug localization is still challenging because of semantic gap between bug reports and code, and insufficient information of short methods. 
 
