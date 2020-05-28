@@ -1,0 +1,570 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/raddriceee/ontologies/2019/10/untitled-ontology-17#"
+     xml:base="http://www.semanticweb.org/raddriceee/ontologies/2019/10/untitled-ontology-17"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/BGOntology"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology#call -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/BGOntology#call">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Method"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology#Method"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology/API"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology#has -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/BGOntology#has">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Class"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Method"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/File"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Repository"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology#Class"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology#Method"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology#Parameter"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology#Variable"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology/BugReport"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology/Commit"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology/MethodDescription"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology#inheritance -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/BGOntology#inheritance">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Class"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology#Class"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology#instanceof -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/BGOntology#instanceof">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Parameter"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Variable"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology#Class"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology#returnType -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/BGOntology#returnType">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Method"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology#Class"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/fix -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/BGOntology/fix">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Commit"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology/BugReport"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/hasAnswer -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/BGOntology/hasAnswer">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Question"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology/Answer"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/modify -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/BGOntology/modify">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Commit"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology#Method"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/search -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/BGOntology/search">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/BugReport"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology/Question"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/similar -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/BGOntology/similar">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Method"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/BugReport"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology#Method"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/BGOntology/BugReport"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/timeNear -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/BGOntology/timeNear">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/update -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/BGOntology/update">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/BGOntology#Class"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/BGOntology#Method"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/BGOntology#Class"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/BGOntology#Method"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology#commitID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology#commitID">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Class"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Method"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Parameter"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Variable"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/API"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Commit"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/File"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology#uri -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology#uri">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Class"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Method"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Parameter"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Variable"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/API"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/File"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology#sourceCode -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology#sourceCode">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Method"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/AST -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/AST">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Method"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/PDG -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/PDG">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Repository"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/answerId -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/answerId">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Answer"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/answer_code -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/answer_code">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Answer"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/answer_text -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/answer_text">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Answer"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/author -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/author">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Commit"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/calledAPIComment -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/calledAPIComment">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/calledAPISeq -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/calledAPISeq">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/comment -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/comment">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/commitMsg -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/commitMsg">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Commit"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/date -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/date">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Answer"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Commit"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Question"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/deletedVer -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/deletedVer">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.semanticweb.org/BGOntology#Class"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/BGOntology#Method"/>
+                            <rdf:Description rdf:about="http://www.semanticweb.org/BGOntology#Variable"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/description -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/description">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/BugReport"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/isConstructor -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/isConstructor">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Method"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/name -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/name">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Repository"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/notDeclared -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/notDeclared">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Class"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/owner -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/owner">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Repository"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/position -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/position">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Class"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology#Method"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/questionId -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/questionId">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Question"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/question_text -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/question_text">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Question"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/summary -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/summary">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/BugReport"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/tags -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/tags">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Question"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/url -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/url">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/BugReport"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Repository"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/vote -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/BGOntology/vote">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/BGOntology/Answer"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology#Class -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/BGOntology#Class">
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/BGOntology#Method"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology#Method -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/BGOntology#Method">
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/BGOntology#Variable"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology#Parameter -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/BGOntology#Parameter"/>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology#Variable -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/BGOntology#Variable"/>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/API -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/BGOntology/API"/>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/Answer -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/BGOntology/Answer"/>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/BugReport -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/BGOntology/BugReport"/>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/Commit -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/BGOntology/Commit"/>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/File -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/BGOntology/File"/>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/MethodDescription -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/BGOntology/MethodDescription"/>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/Question -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/BGOntology/Question"/>
+    
+
+
+    <!-- http://www.semanticweb.org/BGOntology/Repository -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/BGOntology/Repository"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
