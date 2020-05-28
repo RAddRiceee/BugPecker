@@ -41,7 +41,7 @@ Cache-Control: no-cache
 
 ## Build
 
-Expect dataset projects, if revision graphs of other projects are needed, you can download the source code, build and run locally.
+Except for dataset projects, if revision graphs of other projects are needed, you can download the source code, build and run locally.
 
 ### Requirements
 
