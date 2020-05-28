@@ -20,34 +20,8 @@ We evaluated BugPecker on three open source projects. The results show that BugP
 
 The revision analyzer, a component of BugPecker, builds revision graphs from commits and past bug reports. Revision graphs contain some code related entities and relations between them, mainly method entities and similar-to and call relations between method entities. Each code related entities have a "version" attribute, which means it was extracted from the specific version of source code. The revision analyzer serves as a web service, and the way to access the web service and more implementation details is available [here](https://github.com/RAddRiceee/BugPecker/tree/master/RevisionAnalyzer).
 
-## Semantic matcher
+## Semantic matcher and Learner
 
-
-
-## Bug Localization
-
-### environment
-
-### data
-First you need download the raw data from [dataset](https://jbox.sjtu.edu.cn/l/VooilN), to generate the data for training and testing( see data processing) 
-```
-cd bugloc/dataset/
-mkdir dataset
-cd dataset
-unrar x dataset.rar
-```
-
-You can also download the processed data from [processed_data] to train and test a model.
-```
-TODO
-```
-
-you can download the test result from [test_result] to evaluate the result.
-```
-TODO
-```
-### data processing 
-
-### train
-
-### test
+The Semantic matcher and the Learner are both components of BugPecker. Thr former calculates the semantic similarity between a method and a bug report and passes the semantic matching score to the Learner. The Learner
+combines the semantic mathing score and the other three kinds of scores(bug fixing recency score, bug fixing frequency score, collaborative filtering score) to select the possible buggy methods from repository and rank them
+by supocious score. More implementation details is available [here](https://github.com/RAddRiceee/BugPecker/tree/master/MatcherAndLearner).
