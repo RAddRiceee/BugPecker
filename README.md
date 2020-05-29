@@ -14,7 +14,7 @@ In this paper, we present BugPecker, a novel method-level bug localization appro
 
 The above figure shows the overview of BugPecker. It consists of three components: (1) The *revision analyzer* constructs revision graphs from commits; (2) The *semantic matcher* calculates semantic similarity scores between bug reports and methods; (3) The *learner* locates buggy methods with a non-linear DNN that takes the semantic matching feature, the revised collaborative filtering feature, the bug fixing recency feature and bug fixing frequency feature as its input.
 
-We evaluated BugPecker on three open source projects. The results show that BugPecker could localize bugs at method level more precisely than the baselines, which are [DNNLoc-m](https://doi.org/10.1109/ICPC.2017.24) and [BLIA 1.5](https://doi.org/10.1016/j.infsof.2016.11.002), and achieving a MAP of 0.263 and a MRR of 0.291.
+We evaluated BugPecker on three open source projects (AspectJ, SWT and Tomcat). The dataset and some intermediate data relevant to the experiment are available [here](https://jbox.sjtu.edu.cn/l/aoMeGs). The results show that BugPecker could localize bugs at method level more precisely than the baselines, which are [DNNLoc-m](https://doi.org/10.1109/ICPC.2017.24) and [BLIA 1.5](https://doi.org/10.1016/j.infsof.2016.11.002), and achieving a MAP of 0.263 and a MRR of 0.291.
 
 ## Revision analyzer
 
