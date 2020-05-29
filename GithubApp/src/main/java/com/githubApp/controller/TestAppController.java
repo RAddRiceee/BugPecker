@@ -49,16 +49,11 @@ public class TestAppController {
         try {
             JSONObject json = JSON.parseObject(info);
             String action = (String) json.get("action");
-            if (action.equals("deleted") || action.equals("edited")) {
-                return;
-            } else if (action.equals("created")) {
-//                String userName = (String) ((JSONObject) json.get("sender")).get("login");
-//                JSONArray repos = (JSONArray) json.get("repositories");
-//                if (repos == null) {
-//                    return;
-//                }
-//                handleIssueServiceImpl.saveAuthedRepo(userName, repos);
-            } else if (action.equals("opened")) {
+//            if (action.equals("deleted") || action.equals("edited")) {
+//                return;
+//            } else if (action.equals("created")) {
+
+            if (action.equals("opened")) {
                 JSONObject issue = (JSONObject) json.get("issue");
                 boolean isBuggy = handleIssueServiceImpl.isBugReport(issue);
                 if (!isBuggy) {
@@ -66,8 +61,6 @@ public class TestAppController {
                 }
                 String issueUrl = (String) issue.get("url");
                 handleIssueServiceImpl.handleBugReport(issueUrl, json);
-            } else if (action.equals("added")) {
-                //to do
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,7 +80,7 @@ public class TestAppController {
         if (codeDataList != null) {
             for (JSONObject data : codeDataList) {
                 JSONObject codeMetaData = (JSONObject) data.get("codeMetaData");
-                if(codeMetaData==null){
+                if (codeMetaData == null) {
                     continue;
                 }
                 versionNum += Integer.valueOf((String) codeMetaData.get("versionNum"));
@@ -111,14 +104,4 @@ public class TestAppController {
         return "result";
     }
 
-//    @RequestMapping("")
-//    public String test() {
-//
-//        Issue issue = new Issue();
-//        issue.setTitle("test");
-//        issue.setBody("test python listener");
-//        locateBugServiceImpl.getBugLocalization(issue,"123456");
-//        return "redirect:https://github.com/apps/buglocalization";
-//
-//    }
 }

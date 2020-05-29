@@ -29,7 +29,8 @@ public class HandleIssueServiceImpl implements HandleIssueService {
     private final String GITHUB_URL_PREFIX = "https://github.com/";
     private final String initUrl = "http://202.120.40.28:5689/parser/KGWeb/initForGithubApp";
     private final String updateUrl = "http://202.120.40.28:5689/parser/KGWeb/versionUpdate";
-//    private String accessToken = "";
+    private final String resultUrl = "http://202.120.40.28:5655/";
+
 
 
     public String sendInfoToModel(String code) {
@@ -43,9 +44,11 @@ public class HandleIssueServiceImpl implements HandleIssueService {
                 return null;
             String accessToken = accessInfo.split("&")[0].split("=")[1];
 
+            //get UserName
             String getUserNameUrl = GITHUB_API_PREFIX + "user";
             JSONObject userAsJson = JSON.parseObject(getUrlConnection(getUserNameUrl, accessToken));
             userName = (String) userAsJson.get("login");
+
             UserInfo userInfo = new UserInfo();
             userInfo.setAccessToken(accessToken);
             userInfo.setUserName(userName);
@@ -89,56 +92,60 @@ public class HandleIssueServiceImpl implements HandleIssueService {
 
     public void handleBugReport(String issueUrl, JSONObject json) {
         JSONObject issueJson = (JSONObject) json.get("issue");
-        String issueTitle = (String) issueJson.get("title");
-        String issueBody = (String) issueJson.get("body");
-        int issueId = (int) issueJson.get("number");
-        String gitUrl = (String) ((JSONObject) json.get("repository")).get("ssh_url");
-        String userName = (String) ((JSONObject) json.get("sender")).get("login");
-        String repoName = (String) ((JSONObject) json.get("repository")).get("name");
-        String repoFullName = (String) ((JSONObject) json.get("repository")).get("full_name");
+        try {
+            String issueTitle = (String) issueJson.get("title");
+            String issueBody = (String) issueJson.get("body");
+            int issueId = (int) issueJson.get("number");
+            String gitUrl = (String) ((JSONObject) json.get("repository")).get("ssh_url");
+            String userName = (String) ((JSONObject) json.get("sender")).get("login");
+            String repoName = (String) ((JSONObject) json.get("repository")).get("name");
+            String repoFullName = (String) ((JSONObject) json.get("repository")).get("full_name");
 
-        String latestCommitId = null;
-        HashMap<String, String> existProject = getExistProjects();
-        if (existProject.containsKey(repoName)) {
-            latestCommitId = existProject.get(repoName);
-        } else {
-            String[] titleInfo = issueTitle.split("&");
-            if (titleInfo.length > 1 && titleInfo[titleInfo.length - 1].split(":")[0].equals("commitId")) {
-                latestCommitId = titleInfo[titleInfo.length - 1].split(":")[1];
+            String latestCommitId = null;
+            HashMap<String, String> existProject = getExistProjects();
+            if (existProject.containsKey(repoName)) {
+                latestCommitId = existProject.get(repoName);
             } else {
-                latestCommitId = getLatestCommitId(repoFullName);
+                String[] titleInfo = issueTitle.split("&");
+                //If commitId is assigned
+                if (titleInfo.length > 1 && titleInfo[titleInfo.length - 1].split(":")[0].equals("commitId")) {
+                    latestCommitId = titleInfo[titleInfo.length - 1].split(":")[1];
+                } else {
+                    latestCommitId = getLatestCommitId(repoFullName);
+                }
             }
-        }
-        RepoInfo repoInfo = new RepoInfo();
-        repoInfo.setCommitid(latestCommitId);
-        repoInfo.setProjectID(repoName);
-        repoInfo.setUrl(gitUrl);
-        String result = locateBugServiceImpl.initRepoKG(JSON.toJSONString(repoInfo), updateUrl);
-        if (result == null) {
-            return;
-        }
-        IssueInfo issueInfo = new IssueInfo();
-        issueInfo.setProjectId(repoName);
-        issueInfo.setCommitId(latestCommitId);
-        issueInfo.setIssueTitle(issueTitle);
-        issueInfo.setIssueBody(issueBody);
-//        String bugLocalization = "[('tomcat.java.org.apache.catalina.authenticator.FormAuthenticator-restoreRequest()', 0.951), ('tomcat.java.org.apache.catalina.startup.TldConfig-createTldDigester()', 0.913), ('tomcat.java.org.apache.naming.resources.ResourceAttributes-getETag()', 0.873), ('tomcat.java.org.apache.catalina.core.StandardContext-processTlds()', 0.867), ('tomcat.java.org.apache.catalina.startup.TldConfig-tldScanStream(InputSource)', 0.791)]";
-        String bugLocalization = locateBugServiceImpl.getBugLocalization(issueTitle,issueBody,latestCommitId,repoName);
-        if (bugLocalization.equals("error") || bugLocalization.equals("500")) {
-            editIssue(issueUrl, issueJson, "error");
-            return;
-        }
-        BugInfo bugInfo = new BugInfo();
-        bugInfo.setBugLocalization(bugLocalization);
-        bugInfo.setIssueId(issueId);
-        bugInfo.setIssueTitle(issueTitle);
-        bugInfo.setRepoName(repoName);
-        bugInfo.setUserName(userName);
-        String bugInfoByIssue = JSON.toJSONString(bugInfo);
-        saveInfoByFile(bugInfoByIssue, "bugInfo.txt");
-        String locateInfo = "[Click here to get bug location](http://202.120.40.28:5655/result/" + userName + "/" + repoName + "/" + issueId + ")";
+            RepoInfo repoInfo = new RepoInfo();
+            repoInfo.setCommitid(latestCommitId);
+            repoInfo.setProjectID(repoName);
+            repoInfo.setUrl(gitUrl);
+            String result = locateBugServiceImpl.initRepoKG(JSON.toJSONString(repoInfo), updateUrl);
+            if (result == null) {
+                return;
+            }
+            IssueInfo issueInfo = new IssueInfo();
+            issueInfo.setProjectId(repoName);
+            issueInfo.setCommitId(latestCommitId);
+            issueInfo.setIssueTitle(issueTitle);
+            issueInfo.setIssueBody(issueBody);
+            String bugLocalization = locateBugServiceImpl.getBugLocalization(issueTitle, issueBody, latestCommitId, repoName);
+            if (bugLocalization.equals("error") || bugLocalization.equals("500")) {
+                editIssue(issueUrl, issueJson, "BugLocation Service is not in work");
+                return;
+            }
+            BugInfo bugInfo = new BugInfo();
+            bugInfo.setBugLocalization(bugLocalization);
+            bugInfo.setIssueId(issueId);
+            bugInfo.setIssueTitle(issueTitle);
+            bugInfo.setRepoName(repoName);
+            bugInfo.setUserName(userName);
+            String bugInfoByIssue = JSON.toJSONString(bugInfo);
+            saveInfoByFile(bugInfoByIssue, "bugInfo.txt");
+            String locateInfo = "[Click here to get bug location]("+resultUrl+"result/" + userName + "/" + repoName + "/" + issueId + ")";
 
-        editIssue(issueUrl, issueJson, locateInfo);
+            editIssue(issueUrl, issueJson, locateInfo);
+        }catch (Exception e){
+            editIssue(issueUrl, issueJson, "BugLocation Service is not in work");
+        }
     }
 
     private void editIssue(String issueUrl, JSONObject issue, String bugLocalization) {

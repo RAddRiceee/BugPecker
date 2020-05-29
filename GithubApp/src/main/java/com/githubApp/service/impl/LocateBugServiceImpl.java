@@ -11,6 +11,9 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class LocateBugServiceImpl implements LocateBugService {
 
+    private final String IP = "202.120.40.28";
+
+    private final int Port = 4462;
 
     @Override
     public String initRepoKG(String repoInfo,String url) {
@@ -38,17 +41,14 @@ public class LocateBugServiceImpl implements LocateBugService {
     }
 
     @Override
-//    public String getBugLocalization(String issueInfo) {
     public String getBugLocalization(String issueTitle,String issueBody,String commitId, String repoName) {
 
         Socket socket = new Socket();
         StringBuilder sb = new StringBuilder();
         try {
-            socket = new Socket("202.120.40.28",4462);
-
+            socket = new Socket(IP,Port);
             OutputStream os = socket.getOutputStream();
             PrintStream out = new PrintStream(os);
-//            out.println(issueInfo);
             out.println(repoName);
             out.println(issueTitle);
             out.println(issueBody);
@@ -57,6 +57,7 @@ public class LocateBugServiceImpl implements LocateBugService {
             String tmp = null;
             InputStream is = socket.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is,"utf-8"));
+
             while((tmp=br.readLine())!=null)
                 sb.append(tmp).append('\n');
             System.out.print(sb);
