@@ -11,7 +11,7 @@ If you want to use the githubApp service, you need to create a githubApp by your
 
 ### Configure
 
-This server calls the RevisionAnalyzer componect to initialize your repository. You need to edit the initUrl and UpdateUrl to use the RevisionAnalyzer component in file [HandleIssueServiceImpl.java](./src/main/java/com/githubApp/service/impl/HandleIssueServiceImpl.java). These parameters refer to the location your analyzer service layed out.
+This server calls the RevisionAnalyzer componect to initialize your repository. You need to edit the initUrl and UpdateUrl to use the RevisionAnalyzer component in file [HandleIssueServiceImpl](./src/main/java/com/githubApp/service/impl/HandleIssueServiceImpl.java). These parameters refer to the location your analyzer service layed out.
 
 Before use the Matcher and Learner component, you need to edit the resultUrl in file [HandleIssueServiceImpl](./src/main/java/com/githubApp/service/impl/HandleIssueServiceImpl.java). This url should be the same with the ip of the callback url of your githubApp. 
 
