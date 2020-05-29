@@ -22,7 +22,7 @@ You should authorize GithubApp to access the repository at first.
 The past commits and bug reports will be used to train the model of BugPecker.
 Depends on the size of your repository, the initialization may take several minutes.
 As figure 1 shows, statistics of your repository are available after the initialization.
-![avatar](https://raw.githubusercontent.com/Tekfei/test/master/2.png)
+![avatar](https://raw.githubusercontent.com/Tekfei/test/master/init.png)
 ### Bug Localization
 You need to assign your issue a bug label and the corresponding commitId for a new bug report by default is the latest commitId in master branch. If you want to assign a sepcific commitId, you should write in the title in the form of "&commitId:……".
 BugPecker will be triggered automatically and comment the bug report with suspicious buggy code.
