@@ -7,9 +7,8 @@ class Configuration:
         self.logger = logging.getLogger('BugLoc')
         self.log_path = './BugLoc.log'
         self.data_path = './dataset/'
-        self.revision_analyzer_url = ''
-        self.revision_analyzer_root = ''
-
+        # specify the revision analyzer versionInfo API here
+        self.version_info_url = 'http://202.120.40.28:5689/parser/KGWeb/versionInfo'
         self.project_csv = os.path.join(self.data_path, project + '.csv')
 
         if not os.path.exists(self.project_csv):

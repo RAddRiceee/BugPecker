@@ -15,7 +15,8 @@ The Learner combines the semantic mathing score calcaulated by the Semantic Matc
 - javalang: 0.11.0
 
 ## Dataset
- you need download the method level bug localization dataset of open-source projects (AspectJ, SWT and Tomcat).from [dataset](https://jbox.sjtu.edu.cn/l/J5z6bj).
+ you need download the method level bug localization dataset of three open-source projects (AspectJ, SWT and Tomcat) from [dataset](https://jbox.sjtu.edu.cn/l/J5z6bj).
+ and put the data into ./dataset, or sepcify the data path yourself in  [config.py](./config.py).
 ```
 cd MatcherAndLearner/
 mkdir dataset
@@ -45,7 +46,7 @@ optional arguments:
 ### prepare
 prepare the data for training and testing a model. 
 
-You need to run RevisionAnalyzer web service (see [RevisionAnalyzer](https://github.com/RAddRiceee/BugPecker/tree/master/RevisionAnalyzer) for help) and specify the url of versionInfo service in [config.py](./comfig.py).
+You need to run RevisionAnalyzer web service (see [RevisionAnalyzer](https://github.com/RAddRiceee/BugPecker/tree/master/RevisionAnalyzer) for help) and specify the url of versionInfo service in [config.py](./config.py).
 You need to specify the project data to prepare, take 'tomcat' as an example.
 ```
 	run.py --project tomcat --prepare

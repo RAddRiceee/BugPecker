@@ -1,5 +1,6 @@
 import os
 import logging
+from tqdm import tqdm
 import javalang
 from utils.astnn_utils import *
 from utils.data_utils import *
@@ -81,20 +82,17 @@ def generate_ast(args, config):
 
     block_root = config.block_path
     json_root = config.json_path
-
     csv_path = config.project_csv
 
-    logger.info('reading data set...')
-    data = pd.read_csv(csv_path).head(1)
+    data = pd.read_csv(csv_path).head(10)
 
-    logger.info('generating astnn')
+    logger.info('generating ast for methods')
     for index, row in data.iterrows():
         commit_id = row['commit_id']
-        logger.info(commit_id)
         bug_id = row['bug_id']
         block_save_path = block_root + commit_id + '.pkl'
         json_save_path = json_root + commit_id + '.json'
-        logger.info(json_save_path)
+
         if os.path.exists(block_save_path):
             continue
 
@@ -108,7 +106,8 @@ def generate_ast(args, config):
 
             extract_method_body_for_specific_commit_version(project_id=project_id,
                                                             commit_id=commit_id,
-                                                            local_path=json_save_path)
+                                                            local_path=json_save_path,
+                                                            versionInfo_url=config.version_info_url)
 
         method_df = process_json_file(json_save_path, args.project)
 

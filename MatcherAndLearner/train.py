@@ -11,7 +11,9 @@ from torch.autograd import Variable
 
 
 def min_max_scaler(col):
-    return (col - col.min()) / (col.max() - col.min())
+    if col.max() != col.min():
+        return (col - col.min()) / (col.max() - col.min())
+    return col
 
 
 def get_batch(dataset, idx, bs):
@@ -21,18 +23,16 @@ def get_batch(dataset, idx, bs):
     for _, item in tmp.iterrows():
         code.append(item['code_ids'])
         word.append(item['report_ids'])
-        labels.append([item['label']])
         brr.append(item['brr'])
         bfr.append(item['bfr'])
         cfs.append(item['cfs'])
         expand_codes.append(item['expand_codes'])
+        labels.append([item['label']])
+    return code, word, torch.FloatTensor(brr), torch.FloatTensor(bfr), torch.FloatTensor(cfs), expand_codes, \
+           torch.FloatTensor(labels)
 
-    return code, word, torch.FloatTensor(brr), torch.FloatTensor(bfr), torch.FloatTensor(
-        cfs), expand_codes, torch.FloatTensor(labels)
 
-
-def init_model(use_gpu, config):
-    batch_size = 64
+def init_model(batch_size, use_gpu, config):
     hidden_dim = 100
     encode_dim = 128
     labels = 1
@@ -63,7 +63,6 @@ def init_model(use_gpu, config):
 def train_model(args, config):
     logger = logging.getLogger('BugLoc')
     train_data = pd.read_pickle(config.data_path + 'train.pkl')
-
     # max min scale
     train_data['bfr'] = min_max_scaler(train_data['bfr'])
     train_data['brr'] = min_max_scaler(train_data['brr'])
@@ -95,7 +94,7 @@ def train_model(args, config):
         i = 0
         length = len(train_data)
         while i < length:
-            batch = get_batch(train_data, i, batch_size, use_expand=True, use_cfs=True, use_bfr_and_brr=True)
+            batch = get_batch(train_data, i, batch_size)
             train1_inputs, train2_inputs, brr_inputs, bfr_inputs, cfs_inputs, expand_inputs, train_labels = batch
             i += batch_size
             if use_gpu:
@@ -112,7 +111,7 @@ def train_model(args, config):
             loss.backward()
             optimizer.step()
 
-        logger.info('Finished training epoch:{}'.format(epochs + 1))
+        logger.info('Finished training epoch:{}'.format(epoch + 1))
         if total_loss <= min_total_loss:
             torch.save(model.state_dict(), config.model_path + 'model.pth')
             min_total_loss = total_loss
@@ -140,7 +139,7 @@ def test_model(args, config):
     if use_gpu:
         model.cuda()
 
-    model = model.load_state_dict(torch.load(f=config.model_path + 'model.pth'))
+    model.load_state_dict(torch.load(f=config.model_path + 'model.pth'))
 
     i = 0
     buggy_rate = []
@@ -161,5 +160,5 @@ def test_model(args, config):
 
     buggy_rate = pd.Series(buggy_rate, index=test_data.index)
     test_data['buggy_rate'] = buggy_rate
-    test_data.to_pickle(config.data_path+'test_result.pkl')
+    test_data.to_pickle(config.data_path + 'test_result.pkl')
     logger.info('finished! ')
