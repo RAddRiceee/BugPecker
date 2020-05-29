@@ -241,9 +241,12 @@ class Learner_Matcher(nn.Module):
                 code_vec_expanded = expanded_method.unsqueeze(0)
             else:
                 code_vec_expanded = torch.cat((code_vec_expanded, expanded_method.unsqueeze(0)), 0)
+        # code_vec_expanded = self.
+
         abs_dist = torch.abs(torch.add(code_vec_expanded, word_vec))
         # abs_dist = torch.abs(torch.add(code_vec, word_vec))
         y = torch.sigmoid(self.hidden2label(abs_dist))
+
         # MLP
         feature_input = []
         for i in range(self.batch_size):
@@ -252,7 +255,6 @@ class Learner_Matcher(nn.Module):
             bfr_item = bfr[i].item()
             cfs_item = cfs[i].item()
             feature_input.append([rate, brr_item, bfr_item, cfs_item])
-            # feature_input.append([rate, brr_item, bfr_item])
 
         feature_input = Variable(torch.LongTensor(feature_input)).float()
 

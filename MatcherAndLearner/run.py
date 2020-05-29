@@ -94,7 +94,7 @@ def run():
     if args.train:
         train(args, config)
     if args.evaluate:
-        evaluate(args, config)
+        evaluate(config)
     if args.test:
         test(args, config)
 

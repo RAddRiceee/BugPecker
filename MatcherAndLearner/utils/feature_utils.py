@@ -12,11 +12,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 
 def stem_tokens(tokens):
-    """ Remove stopword and stem
 
-    Arguments:
-        tokens {list} -- tokens to stem
-    """
     stemmer = PorterStemmer()
     removed_stopwords = [
         stemmer.stem(item) for item in tokens if item not in stopwords.words("english")
@@ -26,11 +22,7 @@ def stem_tokens(tokens):
 
 
 def normalize(text):
-    """ Lowercase, remove punctuation, tokenize and stem
 
-    Arguments:
-        text {string} -- A text to normalize
-    """
     remove_punc_map = dict((ord(char), None) for char in string.punctuation)
     removed_punc = text.lower().translate(remove_punc_map)
     tokenized = word_tokenize(removed_punc)
@@ -40,12 +32,7 @@ def normalize(text):
 
 
 def cosine_sim(text1, text2):
-    """ Cosine similarity with tfidf
 
-    Arguments:
-        text1 {string} -- first text
-        text2 {string} -- second text
-    """
     vectorizer = TfidfVectorizer(tokenizer=normalize, min_df=1, stop_words="english")
     tfidf = vectorizer.fit_transform([text1, text2])
     sim = (tfidf * tfidf.T).A[0, 1]
@@ -54,17 +41,6 @@ def cosine_sim(text1, text2):
 
 
 def top_k_wrong_files(right_files, br_raw_text, java_files, k=20):
-    """ Randomly samples 2*k from all wrong files and returns metrics
-        for top k files according to rvsm similarity.
-
-    Arguments:
-        right_files {list} -- list of right files
-        br_raw_text {string} -- raw text of the bug report
-        java_files {dictionary} -- dictionary of source code files
-
-    Keyword Arguments:
-        k {integer} -- the number of files to return metrics (default: {50})
-    """
 
     # Randomly sample 2*k files
     randomly_sampled = random.sample(set(java_files.index.tolist()) - set(right_files), 2 * k)
@@ -79,26 +55,20 @@ def top_k_wrong_files(right_files, br_raw_text, java_files, k=20):
     return top_k_files
 
 
-def random_k_wrong_files(right_files, java_files, k=20):
-    # Randomly sample 2*k files
+def random_k_wrong_methods(right_files, java_files, k=300):
+    # Randomly sample k negative methods
     randomly_sampled = random.sample(set(java_files) - set(right_files), k)
     return randomly_sampled
 
 
 def get_months_between(d1, d2):
-    """ Calculates the number of months between two date strings
-
-    Arguments:
-        d1 {datetime} -- date 1
-        d2 {datetime} -- date 2
-    """
 
     diff_in_months = abs((d1.year - d2.year) * 12 + d1.month - d2.month)
 
     return diff_in_months
 
 
-def previous_reports_for_mlevel(method, until, bug_reports):
+def get_previous_fixed_reports(method, until, bug_reports):
     def find_method_occurence(methods):
         if method in methods:
             return 1
@@ -111,17 +81,15 @@ def previous_reports_for_mlevel(method, until, bug_reports):
     return pre_reports
 
 
-def most_recent_report_for_mlevel(reports):
-    """ Returns the most recently submitted previous report that shares a method name with the given bug report
-    """
+def most_recent_report(reports):
     if len(reports):
         reports = reports.sort_values("commit_time")
         return reports.tail(1)
     return None
 
 
-def bug_fixing_recency_for_mlevel(commit_time, prev_fixed_reports):
-    mrr = most_recent_report_for_mlevel(prev_fixed_reports)
+def bug_fixing_recency(commit_time, prev_fixed_reports):
+    mrr = most_recent_report(prev_fixed_reports)
     if mrr is not None:
         for index, row in mrr.iterrows():
             mrr_report_time = row['commit_time']
@@ -129,9 +97,9 @@ def bug_fixing_recency_for_mlevel(commit_time, prev_fixed_reports):
     return 0
 
 
-def collaborative_filtering_score_for_mlevel(cur_report, prev_reports, k=50,
-                                             whether_expand_commit=False, commit2commit=None,
-                                             whether_expand_method=False, method2method=None):
+def collaborative_filtering_score(cur_report, prev_reports, k=50,
+                                  whether_expand_commit=True, commit2commit=None,
+                                  whether_expand_method=True, method2method=None):
     """
         给定一个bug report计算其之前出现的所有相似度高的bug reports
         然后计算该bug report与相似bug report所修改过的方法的与该bug report的协同过滤分数
@@ -153,7 +121,6 @@ def collaborative_filtering_score_for_mlevel(cur_report, prev_reports, k=50,
     # 按bug report的 cos_sim 进行排序取前k个
     sim_commits_sorted_top_k = sorted(sim_commits.items(), key=lambda item: (item[1], item[0]), reverse=True)[:k]
     sim_commits_ids = [i[0] for i in sim_commits_sorted_top_k]
-    print('before expand commit:', len(sim_commits_ids))
 
     all_ids = list(sim_commits)
     for key in all_ids:
@@ -187,8 +154,6 @@ def collaborative_filtering_score_for_mlevel(cur_report, prev_reports, k=50,
                 sim_commits[commit_id] += expand_commits[commit_id]
             else:
                 sim_commits[commit_id] = expand_commits[commit_id]
-    print('expand commit num:', len(expand_commits_ids))
-    print('after expand commit:', len(sim_commits))
 
     method_cfs = {}
     # 遍历sim_bug_report计算sim_method的协同过滤分数
@@ -203,7 +168,6 @@ def collaborative_filtering_score_for_mlevel(cur_report, prev_reports, k=50,
                 method_cfs[method] = 0
             method_cfs[method] += (sim_commits[commit_id] / num_methods)
 
-    print('before expand method:', len(method_cfs))
 
     if whether_expand_method:
         for method_uri in list(method_cfs.keys()):
@@ -220,7 +184,6 @@ def collaborative_filtering_score_for_mlevel(cur_report, prev_reports, k=50,
                 if sim_method_uri not in method_cfs:
                     method_cfs[sim_method_uri] = 0
                 method_cfs[sim_method_uri] += (score / length)
-    print('after expand method:', len(method_cfs))
 
     return method_cfs
 

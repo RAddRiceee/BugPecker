@@ -1,9 +1,13 @@
 import gc
 import json
 import requests
-import paramiko
 import pandas as pd
 from datetime import datetime
+
+
+def strp2date(old_time):
+    new_time = datetime.strptime(old_time, "%Y-%m-%d %H:%M:%S")
+    return new_time
 
 
 def process_report_text(summary, description):
@@ -24,32 +28,21 @@ def process_report_text(summary, description):
     return smy + des
 
 
-def extract_method_body_for_specific_commit_version(project_id, commit_id, local_path):
+def extract_method_body_for_specific_commit_version(project_id, commit_id, local_path, versionInfo_url):
     data = {
         "projectID": project_id,
         "commitId": commit_id}
     headers = {
         "content-type": "application/json"}
     response = requests.post(
-        url="http://202.120.40.28:5689/parser/KGWeb/versionInfo",
+        url=versionInfo_url,
         headers=headers,
         data=json.dumps(data))
-    print(response)
 
-    if not response.ok:
-        return 'error'
-
-    json_file_path = eval(response.text)['jsonFilePath']
-    response.close()
-
-    t = paramiko.Transport(('202.120.40.28', 1234))
-    t.connect(username='user', password='admin@se1405')  # 登录远程服务器
-    sftp = paramiko.SFTPClient.from_transport(t)  # sftp传输协议
-    src = json_file_path
-    des = local_path
-    sftp.get(src, des)  # 下载文件
-    t.close()
-    print('download json file success!')
+    content = response.content.decode('utf-8')
+    content = json.loads(content)
+    with open(local_path, 'w') as f:
+        f.write(json.dumps(content))
 
 
 def process_method_uri(method_uri_raw, method_pos):
@@ -104,5 +97,3 @@ def process_json_file(local_json_path, project_name):
 
     method_df = pd.DataFrame.from_dict(method_dict, orient='index', columns=['code'])
     return method_df
-
-
