@@ -1,10 +1,6 @@
 # BugPecker
 BugPecker: Locating Faulty Methods with Deep Learning on Revision Graphs
 
-## Github plugin
-
-We have implemented the BugPecker tool as a Github plugin in Java. After submitting a bug report in the Github issue system, programmers could get ranked suspicious buggy methods later from BugPecker. Our github plugin is available [here](https://github.com/apps/bugpecker), which presents more detailed information and user guide about the Github plugin. You are recommended to create your own githubApp with the code we provide. If you want to use our plugin, you need to contact us before.
-
 ## Introduction
 <img src="./arc.png" alt="arc.png" style="zoom:30%;" />
 
@@ -25,3 +21,7 @@ The revision analyzer, a component of BugPecker, builds revision graphs from com
 The Semantic matcher and the Learner are both components of BugPecker. Thr former calculates the semantic similarity between a method and a bug report and passes the semantic matching score to the Learner. The Learner
 combines the semantic mathing score and the other three kinds of scores(bug fixing recency score, bug fixing frequency score, collaborative filtering score) to select the possible buggy methods from repository and rank them
 by supocious score. More implementation details is available [here](https://github.com/RAddRiceee/BugPecker/tree/master/MatcherAndLearner).
+
+## Github plugin
+
+We have implemented the BugPecker tool as a Github plugin in Java. After submitting a bug report in the Github issue system, programmers could get ranked suspicious buggy methods later from BugPecker. You are recommended to create your own githubApp with the code we provide. If you want to use our plugin, you can contact us.
