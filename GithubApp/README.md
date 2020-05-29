@@ -10,8 +10,11 @@ If you want to use the githubApp service, you need to create a githubApp by your
 - Tomcat
 
 ### Configure
+
 This server call the RevisionAnalyzer componect to initialize your repository. You need to edit the initUrl and UpdateUrl to use the RevisionAnalyzer component in file [HandleIssueServiceImpl.java](./src/main/java/com/githubApp/service/impl/HandleIssueServiceImpl.java). These parameters refer to the location your analyzer service layed out.
-Before use the Matcher and Learner component, you need to edit the resultUrl in file [HandleIssueServiceImpl.java](./src/main/java/com/githubApp/service/impl/HandleIssueServiceImpl.java). This url should be the same with the ip of the callback url of your githubApp. Also you need to change the IP and Port in [LocateBugServiceImpl.java](./src/main/java/com/githubApp/service/impl/LocateBugServiceImpl.java). These parameters refer the location where your bug locator service layed out.
+Before use the Matcher and Learner component, you need to edit the resultUrl in file [HandleIssueServiceImpl](./src/main/java/com/githubApp/service/impl/HandleIssueServiceImpl.java). This url should be the same with the ip of the callback url of your githubApp. 
+
+Also you need to change the IP and Port in [LocateBugServiceImpl](./src/main/java/com/githubApp/service/impl/LocateBugServiceImpl.java). These parameters refer the location where your bug locator service layed out.
 
 ## GithubApp snapshot
 ### Initialization

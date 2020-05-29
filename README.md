@@ -3,7 +3,7 @@ BugPecker: Locating Faulty Methods with Deep Learning on Revision Graphs
 
 ## Github plugin
 
-We have implemented the BugPecker tool as a Github plugin in Java. After submitting a bug report in the Github issue system, programmers could get ranked suspicious buggy methods later from BugPecker. The github plugin is available [here](https://github.com/apps/bugpecker), which presents more detailed information and user guide about the Github plugin.
+We have implemented the BugPecker tool as a Github plugin in Java. After submitting a bug report in the Github issue system, programmers could get ranked suspicious buggy methods later from BugPecker. Our github plugin is available [here](https://github.com/apps/bugpecker), which presents more detailed information and user guide about the Github plugin. You are recommended to create your own githubApp with the code we provide. If you want to use our plugin, you need to contact us before.
 
 ## Introduction
 <img src="./arc.png" alt="arc.png" style="zoom:30%;" />
