@@ -1,6 +1,0 @@
-{
-  "bugLocalization": "[('tomcat.java.org.apache.catalina.authenticator.FormAuthenticator-restoreRequest()', 0.951), ('tomcat.java.org.apache.catalina.startup.TldConfig-createTldDigester()', 0.913), ('tomcat.java.org.apache.naming.resources.ResourceAttributes-getETag()', 0.873), ('tomcat.java.org.apache.catalina.core.StandardContext-processTlds()', 0.867), ('tomcat.java.org.apache.catalina.startup.TldConfig-tldScanStream(InputSource)', 0.791)]",
-  "issueId": 21,
-  "issueTitle": "test",
-  "repoName": "Tekfei"
-}

@@ -43,7 +43,6 @@ public class HandleIssueServiceImpl implements HandleIssueService {
                 return null;
             String accessToken = accessInfo.split("&")[0].split("=")[1];
 
-            //根据token获取用户名
             String getUserNameUrl = GITHUB_API_PREFIX + "user";
             JSONObject userAsJson = JSON.parseObject(getUrlConnection(getUserNameUrl, accessToken));
             userName = (String) userAsJson.get("login");
@@ -104,7 +103,6 @@ public class HandleIssueServiceImpl implements HandleIssueService {
             latestCommitId = existProject.get(repoName);
         } else {
             String[] titleInfo = issueTitle.split("&");
-            //bug report题目要求  ……&commitId:www
             if (titleInfo.length > 1 && titleInfo[titleInfo.length - 1].split(":")[0].equals("commitId")) {
                 latestCommitId = titleInfo[titleInfo.length - 1].split(":")[1];
             } else {
@@ -127,7 +125,7 @@ public class HandleIssueServiceImpl implements HandleIssueService {
 //        String bugLocalization = "[('tomcat.java.org.apache.catalina.authenticator.FormAuthenticator-restoreRequest()', 0.951), ('tomcat.java.org.apache.catalina.startup.TldConfig-createTldDigester()', 0.913), ('tomcat.java.org.apache.naming.resources.ResourceAttributes-getETag()', 0.873), ('tomcat.java.org.apache.catalina.core.StandardContext-processTlds()', 0.867), ('tomcat.java.org.apache.catalina.startup.TldConfig-tldScanStream(InputSource)', 0.791)]";
         String bugLocalization = locateBugServiceImpl.getBugLocalization(issueTitle,issueBody,latestCommitId,repoName);
         if (bugLocalization.equals("error") || bugLocalization.equals("500")) {
-            editIssue(issueUrl, issueJson, "\r\n 缺陷定位服务出现一些问题");
+            editIssue(issueUrl, issueJson, "error");
             return;
         }
         BugInfo bugInfo = new BugInfo();
