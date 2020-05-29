@@ -24,4 +24,4 @@ by supocious score. More implementation details is available [here](https://gith
 
 ## Github plugin
 
-We have implemented the BugPecker tool as a Github plugin in Java. After submitting a bug report in the Github issue system, programmers could get ranked suspicious buggy methods later from BugPecker. You are recommended to create your own githubApp with the code we provide. If you want to use our plugin, you can contact us.
+We have implemented the BugPecker tool as a Github plugin in Java. After submitting a bug report in the Github issue system, programmers could get ranked suspicious buggy methods later from BugPecker. You are recommended to create your own githubApp with the code we provide. If you want to use our plugin, you can contact us. More implementation details is available [here](https://github.com/RAddRiceee/BugPecker/tree/master/GithubApp).
