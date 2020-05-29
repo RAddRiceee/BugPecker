@@ -15,14 +15,17 @@ The Learner combines the semantic mathing score calcaulated by the Semantic Matc
 - javalang: 0.11.0
 
 ## Dataset
- you need download the method level bug localization dataset of three open-source projects (AspectJ, SWT and Tomcat) from [dataset](https://jbox.sjtu.edu.cn/l/J5z6bj).
- and put the data into ./dataset, or sepcify the data path yourself in  [config.py](./config.py).
+ you need download the method level bug localization dataset of open-source projects (AspectJ, SWT and Tomcat) from [dataset](https://jbox.sjtu.edu.cn/l/J5z6bj).
 ```
 cd MatcherAndLearner/
 mkdir dataset
 cd dataset
 unrar x dataset.rar
 ```
+
+You need download the relations data of methods and commits from [here](https://jbox.sjtu.edu.cn/l/45eBpZ).
+and put it into  ```./output/project/sim/``` or specify the dir yourself in [config.py](./config.py)
+
 
 ## Usage
 ```
@@ -53,8 +56,6 @@ You need to specify the project data to prepare, take 'tomcat' as an example.
 ```
 After the program has been successfully completed, you can see the prepared data in ```./output/tomcat/data/```.
 
-You can also get the prepared data from [prepared_data]() to train and test a model.
-
 ### train 
 
 To train a model for specific project.
@@ -73,5 +74,3 @@ To evaluate the test result.The metrics used to measure the result are hit@k,MAP
 ```
 	run.py --project tomcat --evaluate
 ```
-
-
