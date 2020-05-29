@@ -1,9 +1,7 @@
 # GithubApp
 GithubApp helps you locate buggy code corresponding to bug reports.
 Once there is a new bug report raised by users in the issue board, BugPecker could give you the suspicious code at method level. 
-More details from [BugPecker repository](https://github.com/RAddRiceee/BugPecker).
 
-The usage is as follows:
 ## Initialization
 You should authorize GithubApp to access the repository at first.
 The past commits and bug reports will be used to train the model of BugPecker.
