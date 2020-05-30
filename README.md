@@ -6,7 +6,7 @@ BugPecker: Locating Faulty Methods with Deep Learning on Revision Graphs
 
 The task of locating the potential buggy files in a software project is called bug localization. To help programmers in bug localization process, many automated bug localization approaches have been proposed. Although these approaches achieved promising results at file level, method level bug localization is still challenging because of semantic gap between bug reports and code, and insufficient information of short methods. 
 
-We present BugPecker, a novel method-level bug localization approach with Deep Learning on Revision Graphs. BugPecker makes the significant improvements, because it introduces deep learning and is the first to encode the commits and bug reports into revision graphs. 
+We develop a tool named BugPecker, a novel method-level bug localization approach with Deep Learning on Revision Graphs. BugPecker makes the significant improvements, because it introduces deep learning and is the first to encode the commits and bug reports into revision graphs. 
 
 The above figure shows the overview of BugPecker. It consists of three components: (1) The *revision analyzer* constructs revision graphs from commits; (2) The *semantic matcher* calculates semantic similarity scores between bug reports and methods; (3) The *learner* locates buggy methods with a non-linear DNN that takes the semantic matching feature, the revised collaborative filtering feature, the bug fixing recency feature and bug fixing frequency feature as its input.
 
