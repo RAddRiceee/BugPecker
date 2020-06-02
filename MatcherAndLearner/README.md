@@ -74,3 +74,5 @@ To evaluate the test result.The metrics used to measure the result are hit@k,MAP
 ```
 	run.py --project tomcat --evaluate
 ```
+## Result
+The results show that BugPecker could localize bugs at method level more precisely than the baselines ([DNNLoc-m](https://doi.org/10.1109/ICPC.2017.24) and [BLIA 1.5](https://doi.org/10.1016/j.infsof.2016.11.002)), and achieving a MAP of 0.263 and a MRR of 0.291.
