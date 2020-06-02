@@ -1,10 +1,10 @@
 # Semantic Matcher and Learner
 ## Introduction
 
-The Semantic Macther uses ASTNN model to embed the methods and the Wrod2vec to embed each word token in a bug reportand gets the global semantic of the bug report by Bi-GRU. To measure the semantic similarity of the method embedding and bug report embedding which are not in the same vector space, a mlp is used to bridge the semantic gap of them, then the cosine similarity is calculated to get the semantic mathing score. Besides, to alleviate the
+The Semantic Macther uses ASTNN model to embed the methods and the Wrod2vec to embed each word token in a bug report and gets the global semantic of the bug report by Bi-GRU. To measure the semantic similarity of the method embedding and bug report embedding which are not in the same vector space, a mlp is used to bridge the semantic gap of them, then the cosine similarity is calculated to get the semantic matching score. Besides, to alleviate the
 sparsity and ambiguity of information in short methods, a short method expansion algorithm is also used in the Semantic Matcher.
 
-The Learner combines the semantic mathing score calcaulated by the Semantic Matcher and the other three kinds of scores(bug fixing recency score, bug fixing frequency score, collaborative filtering score) to select the possible buggy methods from repository and rank them by supocious score
+The Learner combines the semantic mathing score calcaulated by the Semantic Matcher and the other three kinds of scores(bug fixing recency score, bug fixing frequency score, revised collaborative filtering score) to select the possible buggy methods from repository and rank them by supocious score.
 
 
 ## Environment
@@ -15,7 +15,7 @@ The Learner combines the semantic mathing score calcaulated by the Semantic Matc
 - javalang: 0.11.0
 
 ## Dataset
- you need download the method level bug localization dataset of open-source projects (AspectJ, SWT and Tomcat) from [dataset](https://jbox.sjtu.edu.cn/l/J5z6bj).
+ You need download the method level bug localization dataset of open-source projects (AspectJ, SWT and Tomcat) from [dataset](https://jbox.sjtu.edu.cn/l/J5z6bj).
 ```
 cd MatcherAndLearner/
 mkdir dataset
@@ -47,7 +47,7 @@ optional arguments:
 ```
 
 ### prepare
-prepare the data for training and testing a model. 
+Prepare the data for training and testing a model. 
 
 You need to run RevisionAnalyzer web service (see [RevisionAnalyzer](https://github.com/RAddRiceee/BugPecker/tree/master/RevisionAnalyzer) for help) and specify the url of versionInfo service in [config.py](./config.py).
 You need to specify the project data to prepare, take 'tomcat' as an example.
