@@ -1,5 +1,5 @@
 # BugPecker
-BugPecker is a githubApp to help you locate faulty code corresponding to bug reports.
+BugPecker is a tool to help you locate faulty code corresponding to bug reports.
 Once there is a new bug report raised by users in the issue board, BugPecker could give you the suspicious code at method level. 
 
 ## Usage
