@@ -42,7 +42,7 @@ def init_model(batch_size, use_gpu, config):
     word_max_tokens = word2vec.syn0.shape[0]
     word_embedding_dim = word2vec.syn0.shape[1]  # emd_dim
     word_embeddings = np.zeros((word_max_tokens + 1, word_embedding_dim), dtype='float32')
-    word_embeddings[::word2vec.syn0.shape[0]] == word2vec.syn0
+    word_embeddings[:word2vec.syn0.shape[0]] = word2vec.syn0
 
     # code embeddings
     code2vec = Word2Vec.load(config.data_path + "node_w2v_128").wv
