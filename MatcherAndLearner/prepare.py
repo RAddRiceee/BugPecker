@@ -55,7 +55,7 @@ def generate_data(wrong_k, reports, all_reports, repo_blocks_url, data_save_path
         bug_id = row['bug_id']
         commit_id = row['commit_id']
         report_ids = row['report_ids']
-        positive_methods = row['method']
+        positive_methods = eval(row['method'])
         commit_time = row['commit_time']
         blocks_path = repo_blocks_url + commit_id + '.pkl'
         print(positive_methods)

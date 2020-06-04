@@ -61,9 +61,9 @@ def evaluate(config):
     logger.info('hit@5 : {}'.format(hit_5))
     hit_10 = hit_at_k(test_result, 10)
     logger.info('hit@10 : {}'.format(hit_10))
-    MAP = map_metric(test)
+    MAP = map_metric(test_result)
     logger.info('MAP : {}'.format(MAP))
-    MRR = mrr_metric(test)
+    MRR = mrr_metric(test_result)
     logger.info('MRR : {}'.format(MRR))
 
 
